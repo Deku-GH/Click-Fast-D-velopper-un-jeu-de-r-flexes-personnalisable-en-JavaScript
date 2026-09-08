@@ -1,0 +1,2 @@
+# Click-Fast-D-velopper-un-jeu-de-r-flexes-personnalisable-en-JavaScript
+Réaliser Click Fast!, un jeu web de réflexes avec une cible à cliquer, deux modes de jeu, trois difficultés et une durée configurable. Le joueur consulte ses résultats, retrouve ses dernières parties et tente de battre les records associés à chaque configuration. Réglages, records et historique sont conservés dans le navigateur avec `localStorage`.
