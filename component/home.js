@@ -47,7 +47,7 @@ export default function Home() {
 
             <!-- Start Game -->
             <div class="text-center mb-4">
-                <a href ="/game"
+                <a href ="/gameconfig"
                     id="start-game"
                     class="btn btn-primary btn-lg px-5 py-3"
                 >
@@ -55,14 +55,7 @@ export default function Home() {
                 </a>
             </div>
 
-            <!-- Parameters -->
-            <div class="text-center">
-                <button
-                    id="game-parameters"
-                    class="btn btn-outline-secondary px-4"
-                >
-                    ⚙️ Game Parameters
-                </button>
+           
             </div>
 
         </div>

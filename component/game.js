@@ -1,6 +1,19 @@
-export default function Game() {
+const data = localStorage.getItem("clickFast.settings");
+const Data = JSON.parse(data);
 
-    const numberOfSquares = 32;
+let numberOfSquares;
+
+if (Data.difficulty === "easy") {
+    numberOfSquares = 32;
+} 
+else if (Data.difficulty === "medium") {
+    numberOfSquares = 48;
+} 
+else if (Data.difficulty === "hard") {
+    numberOfSquares = 64;
+}
+
+export default function Game() {
 
     const { columns, rows } = getGrid(numberOfSquares);
 
@@ -8,9 +21,11 @@ export default function Game() {
         <div class="container py-4">
 
             <div class="text-center mb-4">
+
                 <h1 class="fw-bold">⚡ FastClick</h1>
 
                 <div class="d-flex justify-content-center gap-5">
+
                     <div>
                         <small class="text-secondary">SCORE</small>
                         <h3 id="score">0</h3>
@@ -18,23 +33,28 @@ export default function Game() {
 
                     <div>
                         <small class="text-secondary">TIME</small>
-                        <h3 id="timer">30</h3>
+                        <h3 id="timer">${Data.duration}</h3>
                     </div>
+
                 </div>
             </div>
+
 
             <div class="ratio ratio-1x1 w-50 mx-auto">
 
                 <div class="border border-3">
 
                     <div
+                        id="game-board"
                         class="d-grid h-100"
                         style="
                             grid-template-columns: repeat(${columns}, 1fr);
                             grid-template-rows: repeat(${rows}, 1fr);
                         "
                     >
+
                         ${createSquares(numberOfSquares)}
+
                     </div>
 
                 </div>
@@ -55,7 +75,7 @@ function createSquares(numberOfSquares) {
         squares += `
             <div
                 class="border"
-                data-index="${i}"
+                id="${i}"
             ></div>
         `;
     }
