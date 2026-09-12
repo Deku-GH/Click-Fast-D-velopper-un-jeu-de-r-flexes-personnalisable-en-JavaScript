@@ -1,12 +1,15 @@
-let count = 0;
+import {
+    addHit,
+    addMiss
+} from "./handscore.js";
+
 let target = null;
 
 export default function click() {
 
-    const dataFromLocalstorage =
-        localStorage.getItem("clickFast.settings");
-
-    const data = JSON.parse(dataFromLocalstorage);
+    const data = JSON.parse(
+        localStorage.getItem("clickFast.settings")
+    );
 
     let max;
 
@@ -30,20 +33,18 @@ export default function click() {
 
 function handClick(event) {
 
-    // Player clicked the wrong square
     if (event.target !== target) {
 
         console.log("misses");
 
+        addMiss();
+
         return;
     }
 
-    // Correct target
     target.style.background = "";
 
-    count++;
-
-    console.log("score:", count);
+    addHit();
 
     const data = JSON.parse(
         localStorage.getItem("clickFast.settings")
@@ -67,10 +68,9 @@ function handClick(event) {
 
 function randomSquare(max) {
 
-    const randomNumber =
-        Math.floor(Math.random() * max);
-
-    console.log(randomNumber);
+    const randomNumber = Math.floor(
+        Math.random() * max
+    );
 
     return document.getElementById(`${randomNumber}`);
 }

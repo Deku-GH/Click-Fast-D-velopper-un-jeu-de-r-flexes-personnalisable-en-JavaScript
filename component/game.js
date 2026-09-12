@@ -1,19 +1,19 @@
-const data = localStorage.getItem("clickFast.settings");
-const Data = JSON.parse(data);
-
-let numberOfSquares;
-
-if (Data.difficulty === "easy") {
-    numberOfSquares = 32;
-} 
-else if (Data.difficulty === "medium") {
-    numberOfSquares = 48;
-} 
-else if (Data.difficulty === "hard") {
-    numberOfSquares = 64;
-}
-
 export default function Game() {
+
+    const data = localStorage.getItem("clickFast.settings");
+    const Data = JSON.parse(data);
+
+    let numberOfSquares;
+
+    if (Data.difficulty === "easy") {
+        numberOfSquares = 32;
+    } 
+    else if (Data.difficulty === "medium") {
+        numberOfSquares = 48;
+    } 
+    else if (Data.difficulty === "hard") {
+        numberOfSquares = 64;
+    }
 
     const { columns, rows } = getGrid(numberOfSquares);
 
@@ -38,7 +38,6 @@ export default function Game() {
 
                 </div>
             </div>
-
 
             <div class="ratio ratio-1x1 w-50 mx-auto">
 
@@ -66,36 +65,36 @@ export default function Game() {
 }
 
 
-function createSquares(numberOfSquares) {
+    function createSquares(numberOfSquares) {
 
-    let squares = "";
+        let squares = "";
 
-    for (let i = 0; i < numberOfSquares; i++) {
+        for (let i = 0; i < numberOfSquares; i++) {
 
-        squares += `
-            <div
-                class="border"
-                id="${i}"
-            ></div>
-        `;
+            squares += `
+                <div
+                    class="border"
+                    id="${i}"
+                ></div>
+            `;
+        }
+
+        return squares;
     }
 
-    return squares;
-}
 
+    function getGrid(number) {
 
-function getGrid(number) {
+        let columns = Math.floor(Math.sqrt(number));
 
-    let columns = Math.floor(Math.sqrt(number));
+        while (number % columns !== 0) {
+            columns--;
+        }
 
-    while (number % columns !== 0) {
-        columns--;
+        const rows = number / columns;
+
+        return {
+            columns,
+            rows
+        };
     }
-
-    const rows = number / columns;
-
-    return {
-        columns,
-        rows
-    };
-}

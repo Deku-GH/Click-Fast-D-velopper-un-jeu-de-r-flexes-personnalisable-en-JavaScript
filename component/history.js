@@ -1,26 +1,28 @@
 export default function History() {
 
-    const history = JSON.parse(
-        localStorage.getItem("fastclick_history")
-    ) || [];
+    const history = JSON.parse(localStorage.getItem("clickFast.scores")) || [];
 
     let rows = "";
 
     history.forEach((game, index) => {
+
         rows += `
             <tr>
                 <td>#${index + 1}</td>
+                <td>${game.pseudo}</td>
+                <td>${game.mode}</td>
+                <td>${game.difficulty}</td>
                 <td>${game.score}</td>
-                <td>${game.clicks}</td>
                 <td>${game.date}</td>
             </tr>
         `;
     });
 
     if (history.length === 0) {
+
         rows = `
             <tr>
-                <td colspan="4" class="text-center text-secondary py-4">
+                <td colspan="7" class="text-center text-secondary py-4">
                     No games played yet.
                 </td>
             </tr>
@@ -51,8 +53,10 @@ export default function History() {
                             <thead>
                                 <tr>
                                     <th>Rank</th>
+                                    <th>Pseudo</th>
+                                    <th>Mode</th>
+                                    <th>Difficulty</th>
                                     <th>Score</th>
-                                    <th>Clicks</th>
                                     <th>Date</th>
                                 </tr>
                             </thead>
@@ -72,7 +76,7 @@ export default function History() {
             <div class="text-center mt-4">
 
                 <a href="/" class="btn btn-primary">
-                    ⚡ Play Again
+                      back home
                 </a>
 
             </div>
@@ -80,4 +84,3 @@ export default function History() {
         </div>
     `;
 }
-

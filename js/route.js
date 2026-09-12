@@ -3,10 +3,16 @@ import home from "../component/home.js"
 import About from "../component/about.js";
 import History from "../component/history.js";
 import Game from "../component/game.js";
+import startTimer from "./games/time.js";
+import GameConfig from "../component/GameConfig.js"
+import config from "./config.js";
+import click from "./games/clickchnage.js";
+import { resetScore } from "./games/handscore.js";
+
 
 document.addEventListener('click', (e) => {
     const { target } = e;
-    if (!target.matches("nav a")) {
+    if (!target.matches("a")) {
 
         return
     }
@@ -14,8 +20,8 @@ document.addEventListener('click', (e) => {
     url_route(e);
 
 })
-const urlRoutes = {
-    "404": {
+const component = {
+    404: {
         component: error,
         titre: "",
         desciption: ""
@@ -36,29 +42,42 @@ const urlRoutes = {
     },
     "/game": {
         component: Game
+    },
+    "/gameconfig": {
+        component: GameConfig
     }
 
 }
 
- export default function url_route (event){
+const url_route = (event) => {
     // event = event || window.event;
     // console.log(event);
     event.preventDefault();
     window.history.pushState({}, '', event.target.href)
 
     handleLocation();
-    
+
 }
 
- const handleLocation = () => {
+export default function handleLocation() {
     const location = window.location.pathname;
     const app = document.getElementById("app");
-      if(location.length==0){
-        location="/"
-      }
-    const route = urlRoutes[location] || urlRoutes["404"];
    
+    console.log("game")
+    const route = component[location] || component["404"];
+
     app.innerHTML = ""
     app.innerHTML = route.component();
+    if (location == "/gameconfig") {
+        config();
+    }
+    if (location == "/game") {
+         resetScore();
+        startTimer();
+        click();
+    }
+
 };
+window.addEventListener("routechange", handleLocation);
 handleLocation();
+
